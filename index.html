@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="index.css">
+    <title>Find your sunrise and sunset</title>
+</head>
+
+<body>
+    <h1>Find out about your day!</h1>
+
+
+    <fieldset>
+        <form>
+            <input type="text" id="user-input-location" placeholder="Enter address or lat/long" required>
+            <input type="date" id="user-input-date" placeholder="YYYY-MM-DD" required/>
+            <input type="button" id="user-click" value="Submit">
+        </form>
+    </fieldset>
+
+
+    <div class="search-results"></div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="index.js"></script>
+</body>
+
+</html>
