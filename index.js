@@ -1,25 +1,24 @@
-"use strict"
+"use strict";
 // mapquest api = https://developer.mapquest.com/documentation/geocoding-api/
 //sunrise api = https://sunrise-sunset.org/api
 
 
 
-const apikey = "792a50c1d3fd55e54cf1432083cf34d73c8c6d2a"
+const apikey = "zkn6RGyTDlLGsN8i8RfEmURf2GozTAkL"
 const sunriseURL = "https://sunrise-sunset.org/api/json"
 const mapquestURL = "https://developer.mapquest.com/documentation/geocoding-api/"
 const mapquestLatLong = {}; 
-const userDateSelected;
+let userDateSelected = ""
 
 
-//sets up event listeners
-function main () {
-    $('form').on('click', '#user-click', function (){
-        let userLocation = $('#user-input-location').val();
-        userDateSelected = $('#user-input-date').val();
-        console.log(userLocation, userDate);
-    })
-    getUserMapquestInfo(userLocation);
-}
+
+// function main () {
+//   $('form').on('click', '#user-click', function (){
+//       let userLocation = $('#user-input-location').val();
+//       userDateSelected = $('#user-input-date').val();
+//       getUserMapquestInfo(userLocation);
+//   })
+// }
 
 //builds object data for mapquest api and fetches lattitude and longitude from JSON and stores the values in mapquestLatLong
 function getUserMapquestInfo (location) {
@@ -30,7 +29,7 @@ function getUserMapquestInfo (location) {
   const mapquestQueryInfo = formatMapquestQuery(mapquestInfo);
   const mapquestSearchURL = mapquestURL + '?' + mapquestQueryInfo; 
 
-  fetch(mapquestSearchURL)
+  fetch(mapquestSearchURL, {mode: 'no-cors'})
   .then(response => {
     if (response.ok) {
       return response.json();
@@ -90,6 +89,14 @@ return $('.search-results').html(
   Solar Noon: ${responseJSON.results.solar_noon}</span></div>`)
 }
 
+//sets up event listeners
+function main () {
+  $('form').on('click', '#user-click', function (){
+      let userLocation = $('#user-input-location').val();
+      userDateSelected = $('#user-input-date').val();
+      getUserMapquestInfo(userLocation);
+      return userDateSelected;
+  })
+}
 
-
-$(main);
+$(main); 
