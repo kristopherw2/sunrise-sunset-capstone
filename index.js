@@ -3,10 +3,10 @@
 //sunrise api = https://sunrise-sunset.org/api
 
 
-const apikey = ""
+const apikey = "zkn6RGyTDlLGsN8i8RfEmURf2GozTAkL"
 
 function getUserLatLong (location) {
-    
+
 }
 
 
