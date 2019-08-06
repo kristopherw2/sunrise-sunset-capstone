@@ -6,19 +6,12 @@
 
 const apikey = "zkn6RGyTDlLGsN8i8RfEmURf2GozTAkL"
 const sunriseURL = "https://sunrise-sunset.org/api/json"
-const mapquestURL = "https://developer.mapquest.com/documentation/geocoding-api/"
+const mapquestURL = "http://www.mapquestapi.com/geocoding/v1/address"
 const mapquestLatLong = {}; 
 let userDateSelected = ""
 
 
 
-// function main () {
-//   $('form').on('click', '#user-click', function (){
-//       let userLocation = $('#user-input-location').val();
-//       userDateSelected = $('#user-input-date').val();
-//       getUserMapquestInfo(userLocation);
-//   })
-// }
 
 //builds object data for mapquest api and fetches lattitude and longitude from JSON and stores the values in mapquestLatLong
 function getUserMapquestInfo (location) {
@@ -29,7 +22,7 @@ function getUserMapquestInfo (location) {
   const mapquestQueryInfo = formatMapquestQuery(mapquestInfo);
   const mapquestSearchURL = mapquestURL + '?' + mapquestQueryInfo; 
 
-  fetch(mapquestSearchURL, {mode: 'no-cors'})
+  fetch(mapquestSearchURL)
   .then(response => {
     if (response.ok) {
       return response.json();
@@ -53,8 +46,8 @@ let mapquestLng = `lng=${mapquestLatLong.lng}`
 
 
 //makes the call to the sunrise api
-function sunriseQuery(mapquestLatLong, userDateSelected) {
-  const sunriseURLQuery =sunriseURL + '?' + mapquestlat + mapquestLng + userDateSelected;
+function sunriseQuery(mapquestLat, mapquestLng, userDateSelected) {
+  const sunriseURLQuery =sunriseURL + '?' + mapquestLat + mapquestLng + userDateSelected;
   
   fetch(sunriseURLQuery)
   .then(response => {
@@ -81,9 +74,10 @@ function formatMapquestQuery (mapquestObjectData) {
 
 //the results
 function sunriseResultsData(responseJSON) {
-  responseJSON.map()
-  $('.search-results').empty()
-return $('.search-results').html(
+  //$('.search-results').empty()
+  //responseJSON.map()
+  $('.search-results').removeAttr('hidden')
+ return $('.search-results').html(
   `<div id="sunriseTime"><span>Sunrise time: ${responseJSON.results.sunrise}<b>
   Sunset Time: ${responseJSON.results.sunset}<b>
   Solar Noon: ${responseJSON.results.solar_noon}</span></div>`)
