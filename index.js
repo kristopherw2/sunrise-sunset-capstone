@@ -6,8 +6,8 @@
 
 const apikey = "zkn6RGyTDlLGsN8i8RfEmURf2GozTAkL"
 const sunriseURL = "https://sunrise-sunset.org/api/json"
-const mapquestURL = "http://www.mapquestapi.com/geocoding/v1/address"
-const mapquestLatLong = {}; 
+const mapquestURL = "https://www.mapquestapi.com/geocoding/v1/address"
+const mapquestLatLong = {};
 let userDateSelected = ""
 
 
@@ -20,7 +20,7 @@ function getUserMapquestInfo (location) {
     "location": location
   }
   const mapquestQueryInfo = formatMapquestQuery(mapquestInfo);
-  const mapquestSearchURL = mapquestURL + '?' + mapquestQueryInfo; 
+  const mapquestSearchURL = mapquestURL + '?' + mapquestQueryInfo;
 
   fetch(mapquestSearchURL)
   .then(response => {
@@ -48,7 +48,7 @@ let mapquestLng = `lng=${mapquestLatLong.lng}`
 //makes the call to the sunrise api
 function sunriseQuery(mapquestLat, mapquestLng, userDateSelected) {
   const sunriseURLQuery =sunriseURL + '?' + mapquestLat + mapquestLng + userDateSelected;
-  
+
   fetch(sunriseURLQuery)
   .then(response => {
     if (response.ok) {
@@ -93,4 +93,4 @@ function main () {
   })
 }
 
-$(main); 
+$(main);
