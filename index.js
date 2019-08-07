@@ -2,7 +2,7 @@
 
 const apikey = "zkn6RGyTDlLGsN8i8RfEmURf2GozTAkL"
 const sunriseURL = "https://api.sunrise-sunset.org/json"
-const mapquestURL = "http://www.mapquestapi.com/geocoding/v1/address"
+const mapquestURL = "https://www.mapquestapi.com/geocoding/v1/address"
 const mapquestLatLong = {};
 let userDateSelected = 0;
 
