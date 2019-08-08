@@ -13,7 +13,7 @@ function getUserMapquestInfo (location) {
     "location": location
   }
   const mapquestQueryInfo = formatMapquestQuery(mapquestInfo);
-  const mapquestSearchURL = mapquestURL + '?' + mapquestQueryInfo; 
+  const mapquestSearchURL = mapquestURL + '?' + mapquestQueryInfo;
 
   fetch(mapquestSearchURL)
   .then(response => {
@@ -43,7 +43,7 @@ function sunriseQuery(mapquestLat, mapquestLng, userDateSelected) {
 
   const sunriseQueryInfo = formatMapquestQuery(sunriseParams);
   const completedSunriseURL = sunriseURL + '?' + sunriseQueryInfo;
-    
+
   fetch(completedSunriseURL)
   .then(response => {
     if (response.ok) {
@@ -68,9 +68,15 @@ function formatMapquestQuery (mapquestObjectData) {
 //the results
 function sunriseResultsData(responseJSON) {
  return $('.search-results').html(
-  `<div id="sunriseTime"><span>Sunrise time: ${responseJSON.results.sunrise}<b>
-  Sunset Time: ${responseJSON.results.sunset}<b>
-  Solar Noon: ${responseJSON.results.solar_noon}</span></div>`)
+  `<div id="sunriseTime"><span>Sunrise time: ${responseJSON.results.sunrise}<br>
+  Sunset Time: ${responseJSON.results.sunset}<br>
+  Solar Noon: ${responseJSON.results.solar_noon}</span></div>
+  <div id="civilTime"><span>Civil Twilight Begin: ${responseJSON.results.civil_twilight_end}<br>
+  Civil Twilight End: ${responseJSON.results.civil_twilight_end}</span></div>
+  <div id="nauticalTime"><span>Nautical Twilight Begin: ${responseJSON.results.nautical_twilight_begin}<br>
+  Nautical Twilight End: ${responseJSON.results.nautical_twilight_end}</span></div>
+  <div id="astronomicalTime"><span>Astronomical Twilight Begin: ${responseJSON.results.astronomical_twilight_begin}<br>
+  Astronomical Twilight End: ${responseJSON.results.astronomical_twilight_end}</span></div>`)
 }
 
 //sets up event listeners
@@ -79,6 +85,8 @@ function main () {
       let userLocation = $('#user-input-location').val();
       userDateSelected = $('#user-input-date').val();
       getUserMapquestInfo(userLocation);
+      $('h1').remove();
+      $('fieldset').remove();
       return userDateSelected;
   })
 }
