@@ -127,7 +127,7 @@ function main () {
       getStaticMap(userLocation);
       $('h1').remove();
       $('fieldset').remove();
-      $('body').css('background-image', 'url(http://lorempixel.com/1920/1080/city)');
+      $('body').css('background-image', 'url(https://lorempixel.com/1920/1080/city)');
       return userDateSelected;
   })
 }
