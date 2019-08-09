@@ -99,16 +99,19 @@ function formatUserParamsQuery (mapquestObjectData) {
 
 //the results
 function sunriseResultsData(responseJSON) {
+  const newDate = Object.keys(responseJSON.results).map(key => `${new Date(`${userDateSelected} ${responseJSON.results[key]} UTC`)}`).map(string => string.replace("GMT-0500 (Central Daylight Time)", ""))
+  //const newDate = newDate.map(string => string.replace("GMT-0500 (Central Daylight Time)", ""))
+  console.log(newDate);
  return $('.search-results').html(
-  `<div id="sunriseTime"><span>Sunrise time: ${responseJSON.results.sunrise}<br>
-  Sunset Time: ${responseJSON.results.sunset}<br>
-  Solar Noon: ${responseJSON.results.solar_noon}</span></div>
-  <div id="civilTime"><span>Civil Twilight Begin: ${responseJSON.results.civil_twilight_end}<br>
-  Civil Twilight End: ${responseJSON.results.civil_twilight_end}</span></div>
-  <div id="nauticalTime"><span>Nautical Twilight Begin: ${responseJSON.results.nautical_twilight_begin}<br>
-  Nautical Twilight End: ${responseJSON.results.nautical_twilight_end}</span></div>
-  <div id="astronomicalTime"><span>Astronomical Twilight Begin: ${responseJSON.results.astronomical_twilight_begin}<br>
-  Astronomical Twilight End: ${responseJSON.results.astronomical_twilight_end}</span></div>`)
+  `<div id="sunriseTime"><span>Sunrise: ${newDate[0]}<br>
+  Sunset Time: ${newDate[1]}<br>
+  Solar Noon: ${newDate[2]}</span></div>
+  <div id="civilTime"><span>Civil Twilight Begin: ${newDate[4]}<br>
+  Civil Twilight End: ${newDate[5]}</span></div>
+  <div id="nauticalTime"><span>Nautical Twilight Begin: ${newDate[6]}<br>
+  Nautical Twilight End: ${newDate[7]}</span></div>
+  <div id="astronomicalTime"><span>Astronomical Twilight Begin: ${newDate[8]}<br>
+  Astronomical Twilight End: ${newDate[9]}</span></div>`)
 }
 //to draw map
 function drawMap (responseJson){
