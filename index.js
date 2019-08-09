@@ -18,7 +18,7 @@ function getStaticMap(userLocation){
   const formattedStaticMapParams = formatUserParamsQuery(staticMapParams);
   const staticMapRequestURL = staticMapURL + formattedStaticMapParams
   
-  console.log(staticMapRequestURL);
+ 
   
   fetch(staticMapRequestURL)
   .then(response => {
@@ -28,7 +28,6 @@ function getStaticMap(userLocation){
     throw new Error(response.statusText);
   })
   .then(responseJson => {
-    console.log(responseJson);
     drawMap(responseJson.url);
   })
   .catch(err => {
@@ -101,7 +100,6 @@ function formatUserParamsQuery (mapquestObjectData) {
 function sunriseResultsData(responseJSON) {
   const newDate = Object.keys(responseJSON.results).map(key => `${new Date(`${userDateSelected} ${responseJSON.results[key]} UTC`)}`).map(string => string.replace("GMT-0500 (Central Daylight Time)", ""))
   //const newDate = newDate.map(string => string.replace("GMT-0500 (Central Daylight Time)", ""))
-  console.log(newDate);
  return $('.search-results').html(
   `<div id="sunriseTime"><span>Sunrise: ${newDate[0]}<br>
   Sunset Time: ${newDate[1]}<br>
