@@ -3,8 +3,28 @@
 const apikey = "zkn6RGyTDlLGsN8i8RfEmURf2GozTAkL"
 const sunriseURL = "https://api.sunrise-sunset.org/json"
 const mapquestURL = "http://www.mapquestapi.com/geocoding/v1/address"
+const staticMapURL = "https://www.mapquestapi.com/staticmap/v5/map?"
 const mapquestLatLong = {};
 let userDateSelected = 0;
+
+function getStaticMap(){
+
+  const staticMapRequestURL = staticMapURL + "&key="+ apikey + "&center="+ $('#user-input-location').val() + "size=360,500";
+  console.log(staticMapRequestURL);
+  fetch(staticMapRequestURL)
+  .then(response => {
+    if (response.ok) {
+      return response.json();
+    }
+    throw new Error(response.statusText);
+  })
+  .then(responseJson => {
+    drawMap(responseJson);
+  })
+  .catch(err => {
+    console.log(`${err.message}`);
+  });
+}
 
 //builds object data for mapquest api and fetches lattitude and longitude from JSON and stores the values in mapquestLatLong
 function getUserMapquestInfo (location) {
@@ -12,9 +32,9 @@ function getUserMapquestInfo (location) {
     "key": apikey,
     "location": location
   }
+
   const mapquestQueryInfo = formatMapquestQuery(mapquestInfo);
   const mapquestSearchURL = mapquestURL + '?' + mapquestQueryInfo;
-
   fetch(mapquestSearchURL)
   .then(response => {
     if (response.ok) {
@@ -65,6 +85,7 @@ function formatMapquestQuery (mapquestObjectData) {
   return mapquestQueryItems.join('&');
 }
 
+
 //the results
 function sunriseResultsData(responseJSON) {
  return $('.search-results').html(
@@ -78,15 +99,20 @@ function sunriseResultsData(responseJSON) {
   <div id="astronomicalTime"><span>Astronomical Twilight Begin: ${responseJSON.results.astronomical_twilight_begin}<br>
   Astronomical Twilight End: ${responseJSON.results.astronomical_twilight_end}</span></div>`)
 }
-
+//to draw map
+function drawMap (responseJson){
+  return $('.map').append(`<img id="staticMap" src="${responseJson}" alt ="map of location"></img>`)
+}
 //sets up event listeners
 function main () {
   $('form').on('click', '#user-click', function (){
       let userLocation = $('#user-input-location').val();
       userDateSelected = $('#user-input-date').val();
       getUserMapquestInfo(userLocation);
+      getStaticMap(userLocation);
       $('h1').remove();
       $('fieldset').remove();
+      $('body').css('background-image', 'url(http://lorempixel.com/1920/1080/city)');
       return userDateSelected;
   })
 }
