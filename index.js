@@ -6,6 +6,8 @@ const mapquestURL = "https://www.mapquestapi.com/geocoding/v1/address"
 const staticMapURL = "https://www.mapquestapi.com/staticmap/v5/map?"
 const mapquestLatLong = {};
 let userDateSelected = 0;
+let mapquestLat = 0
+let mapquestLng = 0
 
 //makes call to the mapquest static map api
 function getStaticMap(userLocation){
@@ -17,9 +19,9 @@ function getStaticMap(userLocation){
     }
   const formattedStaticMapParams = formatUserParamsQuery(staticMapParams);
   const staticMapRequestURL = staticMapURL + formattedStaticMapParams
-  
- 
-  
+
+
+
   fetch(staticMapRequestURL)
   .then(response => {
     if (response.ok) {
@@ -53,8 +55,8 @@ function getUserMapquestInfo (location) {
     throw new Error(response.statusText);
   })
   .then(responseJson => {
-    const mapquestLat = `${responseJson.results[0].locations[0].latLng.lat}`
-    const mapquestLng = `${responseJson.results[0].locations[0].latLng.lng}`
+    mapquestLat = `${responseJson.results[0].locations[0].latLng.lat}`
+    mapquestLng = `${responseJson.results[0].locations[0].latLng.lng}`
     sunriseQuery(mapquestLat, mapquestLng, userDateSelected);
   })
   .catch(err => {
@@ -114,7 +116,7 @@ function sunriseResultsData(responseJSON) {
 //to draw map
 function drawMap (responseJson){
   $('.map').empty()
-  return $('.map').append(`<img src="${responseJson}" alt="picture of location">`)
+  return $('.map').append(`<img class="mapImg" src="${responseJson}" alt="picture of location">`)
 }
 //sets up event listeners
 function main () {
@@ -123,11 +125,37 @@ function main () {
       userDateSelected = $('#user-input-date').val();
       getUserMapquestInfo(userLocation);
       getStaticMap(userLocation);
-      $('h1').remove();
-      $('fieldset').remove();
-      $('body').css('background-image', 'url(https://lorempixel.com/1920/1080/city)');
+      $('h1').css('display', 'none');
+      $('fieldset').css('display', 'none');
+      $('#reset').css('display', 'block');
+/*      if (mapquestLat <= 30) {
+        $('body').css('background-image'), 'url(https://cdn.pixabay.com/photo/2016/10/18/21/22/california-1751455_960_720.jpg)';
+      }
+      else if (mapquestLat >= 50) {
+        $('body').css('background-image'), 'url(https://cdn.pixabay.com/photo/2016/02/13/12/26/aurora-1197753_960_720.jpg)';
+      }
+      else {
+        $('body').css('background-image'), 'url(https://lorempixel.com/1920/1080/city)';
+      };
+*/
       return userDateSelected;
   })
 }
 
 $(main);
+
+
+function reset () {
+  $('.reset').on('click', '#reset', function (){
+      $('#sunriseTime').remove();
+      $('#civilTime').remove();
+      $('#nauticalTime').remove();
+      $('#astronomicalTime').remove();
+      $('.mapImg').remove();
+      $('h1').css('display','block');
+      $('fieldset').css('display','block');
+      $('body').css('background-image', 'url(https://cdn.pixabay.com/photo/2017/02/19/15/28/italy-2080072_960_720.jpg');
+      $('#reset').css('display', 'none');
+  })
+}
+$(reset);

@@ -69,7 +69,25 @@ span {
   text-align: justify;
   border: solid 2px white;
 }
-
+.map{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  box-sizing: border-box;
+}
+.mapImg{
+ margin: auto;
+ flex-direction: row;
+ width: 50%;
+ text-align: justify;
+}
+#reset {
+  display: none;
+  margin: auto;
+  margin-top: 5px;
+  width: 120px;
+  text-align: center;
+}
 @media only screen and (max-width: 750px) {
   body {
     background-image: url(https://cdn.pixabay.com/photo/2017/09/06/08/18/palm-2720615_960_720.jpg);
