@@ -15,7 +15,7 @@ function getStaticMap(userLocation){
       "key": apikey,
       "center": userLocation,
       "locations": userLocation,
-      "size": "200,200"
+      "size": "170,170"
     }
   const formattedStaticMapParams = formatUserParamsQuery(staticMapParams);
   const staticMapRequestURL = staticMapURL + formattedStaticMapParams
@@ -33,7 +33,7 @@ function getStaticMap(userLocation){
     drawMap(responseJson.url);
   })
   .catch(err => {
-    console.log(`${err.message}`);
+    $('.search-results').text('Something went wrong')
   });
 }
 
@@ -60,7 +60,7 @@ function getUserMapquestInfo (location) {
     sunriseQuery(mapquestLat, mapquestLng, userDateSelected);
   })
   .catch(err => {
-    console.log(`${err.message}`);
+    $('.search-results').txt('Something went wrong')
   });
 
 }
@@ -87,7 +87,7 @@ function sunriseQuery(mapquestLat, mapquestLng, userDateSelected) {
     sunriseResultsData(responseJson);
   })
   .catch(err => {
-    console.log(`${err.message}`);
+    $('.search-results').txt('Something went wrong')
   });
 }
 
@@ -100,10 +100,10 @@ function formatUserParamsQuery (mapquestObjectData) {
 
 //the results
 function sunriseResultsData(responseJSON) {
-  const newDate = Object.keys(responseJSON.results).map(key => `${new Date(`${userDateSelected} ${responseJSON.results[key]} UTC`)}`).map(string => string.replace("GMT-0500 (Central Daylight Time)", ""))
-  //const newDate = newDate.map(string => string.replace("GMT-0500 (Central Daylight Time)", ""))
- return $('.search-results').html(
-  `<div id="sunriseTime"><span>Sunrise: ${newDate[0]}<br>
+  const newDate = Object.keys(responseJSON.results).map(key => `${new Date(`${userDateSelected} ${responseJSON.results[key]} UTC`)}`).map(string => string.slice(0,24)).map(string => string.concat(` Local Time`))
+  return $('.search-results').html(
+  `<h2 class="results-header">Here is your info!</h2>
+  <div id="sunriseTime"><span>Sunrise: ${newDate[0]}<br>
   Sunset Time: ${newDate[1]}<br>
   Solar Noon: ${newDate[2]}</span></div>
   <div id="civilTime"><span>Civil Twilight Begin: ${newDate[4]}<br>
@@ -113,14 +113,19 @@ function sunriseResultsData(responseJSON) {
   <div id="astronomicalTime"><span>Astronomical Twilight Begin: ${newDate[8]}<br>
   Astronomical Twilight End: ${newDate[9]}</span></div>`)
 }
+
+
 //to draw map
 function drawMap (responseJson){
   $('.map').empty()
   return $('.map').append(`<img class="mapImg" src="${responseJson}" alt="picture of location">`)
 }
+
+
 //sets up event listeners
 function main () {
-  $('form').on('click', '#user-click', function (){
+  $('form').on('submit', function (event){
+      event.preventDefault();
       let userLocation = $('#user-input-location').val();
       userDateSelected = $('#user-input-date').val();
       getUserMapquestInfo(userLocation);
@@ -128,34 +133,22 @@ function main () {
       $('h1').css('display', 'none');
       $('fieldset').css('display', 'none');
       $('#reset').css('display', 'block');
-/*      if (mapquestLat <= 30) {
-        $('body').css('background-image'), 'url(https://cdn.pixabay.com/photo/2016/10/18/21/22/california-1751455_960_720.jpg)';
-      }
-      else if (mapquestLat >= 50) {
-        $('body').css('background-image'), 'url(https://cdn.pixabay.com/photo/2016/02/13/12/26/aurora-1197753_960_720.jpg)';
-      }
-      else {
-        $('body').css('background-image'), 'url(https://lorempixel.com/1920/1080/city)';
-      };
-*/
+      $('.tribute-text').css('display', 'none')
+      $('.intro-text').css('display', 'none')
       return userDateSelected;
   })
 }
 
 $(main);
 
-
+//takes user back to start
 function reset () {
   $('.reset').on('click', '#reset', function (){
-      $('#sunriseTime').remove();
-      $('#civilTime').remove();
-      $('#nauticalTime').remove();
-      $('#astronomicalTime').remove();
-      $('.mapImg').remove();
-      $('h1').css('display','block');
-      $('fieldset').css('display','block');
-      $('body').css('background-image', 'url(https://cdn.pixabay.com/photo/2017/02/19/15/28/italy-2080072_960_720.jpg');
+      $('#sunriseTime, #civilTime, #nauticalTime, #astronomicalTime, .mapImg, .results-header').remove();
+      $('h1, fieldset').css('display','block');
+     //$('fieldset').css('display','block');
       $('#reset').css('display', 'none');
+      $('.tribute-text, .intro-text').css('display', '')
   })
 }
 $(reset);

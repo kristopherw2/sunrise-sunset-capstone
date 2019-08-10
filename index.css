@@ -2,29 +2,51 @@
   box-sizing: border-box;
 }
 
-body {
-  font-family: 'Roboto', sans-serif;
-  background-image: url(https://cdn.pixabay.com/photo/2017/02/19/15/28/italy-2080072_960_720.jpg);
-  /* Background image is centered vertically and horizontally at all times */
-  background-position: center center;
-  /* Background image doesn't tile */
-  background-repeat: no-repeat;
-  /* Background image is fixed in the viewport so that it doesn't move when
-  the content's height is greater than the image's height */
-  background-attachment: fixed;
-  /* This is what makes the background image rescale based
-    on the container's size */
-  background-size: cover;
-  /* Set a background color that will be displayed
-    while the background image is loading */
-  background-color: #454545;
+.intro-text,
+.search-results {
+  font-family: "Space Mono";
 }
+
+body {
+  font-family: "Inknut Antiqua";
+}
+
+/* body { */
+/* font-family: 'Roboto', sans-serif; */
+/* background-image: url(https://cdn.pixabay.com/photo/2017/02/19/15/28/italy-2080072_960_720.jpg); */
+/* Background image is centered vertically and horizontally at all times */
+/* background-position: center center; */
+/* Background image doesn't tile */
+/* background-repeat: no-repeat; */
+/* Background image is fixed in the viewport so that it doesn't move when
+  the content's height is greater than the image's height */
+/* background-attachment: fixed; */
+/* This is what makes the background image rescale based
+    on the container's size */
+/* background-size: cover; */
+/* Set a background color that will be displayed
+    while the background image is loading */
+/* background-color: #454545; */
+/* } */
+
+html {
+  background: url(https://cdn.pixabay.com/photo/2017/02/19/15/28/italy-2080072_960_720.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  color: whitesmoke;
+  background-image: linear-gradient(to bottom, rgba(255, 159, 134, .40), rgba(60, 48, 67, .70)), url(https://cdn.pixabay.com/photo/2017/02/19/15/28/italy-2080072_960_720.jpg);
+  height: 100%;
+}
+
 h1 {
-  font-size: 60px;
+  font-size: 300px;
   font-weight: normal;
   text-align: center;
   color: white;
 }
+
 form {
   text-align: center;
   display: flex;
@@ -32,55 +54,68 @@ form {
   flex-direction: row;
   box-sizing: border-box;
 }
-input{
+
+input {
   margin: auto;
-  border: solid 2px white;
 }
-#user-input-location, #user-input-date {
-  flex-direction: column;
+
+#user-input-location,
+#user-input-date {
   display: flex;
-  width: 100%;
-  padding: 0px;
-  margin: 20px;
+  margin: 10px;
 }
+
 #user-click {
   margin: auto;
   width: 80px;
   text-align: center;
 }
+
 fieldset {
   max-width: 360px;
   margin: auto;
+  border: none;
 }
+
 span {
   color: white;
+  text-shadow: 1px 1px black;
 }
+
 .search-results {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   box-sizing: border-box;
-  height: 75vh;
 }
-#sunriseTime, #civilTime, #nauticalTime, #astronomicalTime{
+
+#sunriseTime,
+#civilTime,
+#nauticalTime,
+#astronomicalTime {
   flex-direction: column;
   display: flex;
-  width: 50%;
-  text-align: justify;
+  width: 45%;
   border: solid 2px white;
+  margin: 25px auto 0 auto;
 }
-.map{
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  box-sizing: border-box;
+
+div #sunriseTime {
+  border-color: #8AE9C1;
 }
-.mapImg{
- margin: auto;
- flex-direction: row;
- width: 50%;
- text-align: justify;
+
+div #civilTime {
+  border-color: #86CD82;
 }
+
+div #nauticalTime {
+  border-color: #72A276
+}
+
+div #astronomicalTime {
+  border-color: #666B6A
+}
+
 #reset {
   display: none;
   margin: auto;
@@ -88,19 +123,187 @@ span {
   width: 120px;
   text-align: center;
 }
-@media only screen and (max-width: 750px) {
-  body {
-    background-image: url(https://cdn.pixabay.com/photo/2017/09/06/08/18/palm-2720615_960_720.jpg);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-attachment: fixed;
+
+.tribute-text {
+  position: fixed;
+  left: 3;
+  bottom: 0;
+  text-align: center;
+  font-size: 60%;
+}
+
+@media only screen and (max-width: 320px) {
+  html {
+    background: url(https://cdn.pixabay.com/photo/2017/02/19/15/28/italy-2080072_960_720.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
     background-size: cover;
-    background-color: #454545;
+    color: whitesmoke;
+    background-image: linear-gradient(to bottom, rgba(255, 159, 134, .40), rgba(60, 48, 67, .60)), url(https://cdn.pixabay.com/photo/2017/09/06/08/18/palm-2720615_960_720.jpg);
+    height: 100%;
   }
-  .search-results{
-    height:100vh;
-  }
-#sunriseTime, #civilTime, #nauticalTime, #astronomicalTime {
+
+  #sunriseTime,
+  #civilTime,
+  #nauticalTime,
+  #astronomicalTime {
     width: 100%;
   }
+}
+
+h1 {
+  font-size: 100%;
+  font-weight: normal;
+  text-align: center;
+  color: white;
+  text-shadow: 1px 1px black;
+}
+
+.intro-text {
+  font-size: 100%;
+  font-weight: normal;
+  margin-left: 1%;
+  text-shadow: 1px 1px 1px black;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.search-results h2 {
+  margin-left: auto;
+  margin-right: auto;
+  text-shadow: 1px 1px black;
+}
+
+.search-results span {
+  padding: 1%;
+  line-height: 1.6;
+  font-size: 95%
+}
+
+.search-results div {
+  border-radius: 10px;
+}
+
+br {
+  line-height: 2.3
+}
+
+.map {
+  text-align: center;
+}
+
+.mapImg {
+  margin-top: 3%;
+  width: 170px;
+  height: 170px;
+}
+
+@media only screen and (min-width: 375px) {
+
+  #sunriseTime,
+  #civilTime,
+  #nauticalTime,
+  #astronomicalTime {
+    flex-direction: column;
+    display: flex;
+    width: 100%;
+    border: solid 2px white;
+    margin: 25px auto 0 auto;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  html {
+    background: url(https://cdn.pixabay.com/photo/2017/02/19/15/28/italy-2080072_960_720.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    color: whitesmoke;
+    background-image: linear-gradient(to bottom, rgba(255, 159, 134, .40), rgba(60, 48, 67, .60)), url(https://cdn.pixabay.com/photo/2017/09/06/08/18/palm-2720615_960_720.jpg);
+    height: 100%;
+  }
+
+  .intro-text {
+    font-size: 100%;
+    font-weight: normal;
+    margin-left: 1%;
+    text-shadow: 1px 1px 1px black;
+    text-align: center;
+  }
+
+  .mapImg {
+    margin-top: 3%;
+    width: 300px;
+    height: 300px;
+  }
+
+  #sunriseTime,
+  #civilTime,
+  #nauticalTime,
+  #astronomicalTime {
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .intro-text {
+    text-align: center;
+  }
+
+  .search-results h2 {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    text-shadow: 1px 1px black;
+  }
+
+  #sunriseTime,
+  #civilTime,
+  #nauticalTime,
+  #astronomicalTime {
+    flex-direction: column;
+    display: flex;
+    width: 45%;
+    border: solid 2px white;
+    margin: 60px auto 0 auto;
+  }
+
+  h1 {
+    font-size: 120%;
+    font-weight: normal;
+    text-align: center;
+    color: white;
+    text-shadow: 1px 1px black;
+  }
+
+  .intro-text {
+    font-size: 120%;
+    font-weight: normal;
+    margin-left: 1%;
+    text-shadow: 1px 1px 1px black;
+  }
+
+  .mapImg {
+    margin-top: 3%;
+    width: 300px;
+    height: 300px;
+  }
+
+  div #astronomicalTime {
+    border-color: #666B6A;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 35px;
+  }
+
+  div #nauticalTime {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 35px;
+}
 }
