@@ -57,10 +57,11 @@ function getUserMapquestInfo (location) {
   .then(responseJson => {
     mapquestLat = `${responseJson.results[0].locations[0].latLng.lat}`
     mapquestLng = `${responseJson.results[0].locations[0].latLng.lng}`
+    console.log(responseJson)
     sunriseQuery(mapquestLat, mapquestLng, userDateSelected);
   })
   .catch(err => {
-    $('.search-results').txt('Something went wrong')
+    $('.search-results').txt(`${err.message}`)
   });
 
 }
@@ -100,7 +101,8 @@ function formatUserParamsQuery (mapquestObjectData) {
 
 //the results
 function sunriseResultsData(responseJSON) {
-  const newDate = Object.keys(responseJSON.results).map(key => `${new Date(`${userDateSelected} ${responseJSON.results[key]} UTC`)}`).map(string => string.slice(0,24)).map(string => string.concat(` Local Time`))
+  const newDate = Object.keys(responseJSON.results).map(key => `${new Date(`${userDateSelected.replace(/-/g, '/')} ${responseJSON.results[key]} UTC`)}`).map(string => string.slice(0,24)).map(string => string.concat(` Local Time`))
+  console.log(newDate);
   return $('.search-results').html(
   `<div id="sunriseTime"><span>Sunrise: ${newDate[0]}<br>
   Sunset Time: ${newDate[1]}<br>
@@ -127,14 +129,11 @@ function main () {
       event.preventDefault();
       let userLocation = $('#user-input-location').val();
       userDateSelected = $('#user-input-date').val();
+      console.log(userDateSelected)
       getUserMapquestInfo(userLocation);
       getStaticMap(userLocation);
-      $('h1').css('display', 'none');
-      $('fieldset').css('display', 'none');
-      $('#reset').css('display', 'block');
-      $('.tribute-text').css('display', 'none')
-      $('.intro-text').css('display', 'none')
-      $('#results-header').css('display','block')
+      $('h1, fieldset, .tribute-text, .intro-text').css('display', 'none')
+      $('#reset, #results-header').css('display', 'block');
       return userDateSelected;
   })
 }
@@ -146,7 +145,6 @@ function reset () {
   $('.reset').on('click', '#reset', function (){
       $('#sunriseTime, #civilTime, #nauticalTime, #astronomicalTime, .mapImg, .results-header').remove();
       $('h1, fieldset').css('display','block');
-     //$('fieldset').css('display','block');
       $('#reset',).css('display', 'none');
       $('#results-header').css('display','none');
       $('.tribute-text, .intro-text').css('display', '')
