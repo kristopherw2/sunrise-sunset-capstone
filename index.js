@@ -102,8 +102,7 @@ function formatUserParamsQuery (mapquestObjectData) {
 function sunriseResultsData(responseJSON) {
   const newDate = Object.keys(responseJSON.results).map(key => `${new Date(`${userDateSelected} ${responseJSON.results[key]} UTC`)}`).map(string => string.slice(0,24)).map(string => string.concat(` Local Time`))
   return $('.search-results').html(
-  `<h2 class="results-header">Here is your info!</h2>
-  <div id="sunriseTime"><span>Sunrise: ${newDate[0]}<br>
+  `<div id="sunriseTime"><span>Sunrise: ${newDate[0]}<br>
   Sunset Time: ${newDate[1]}<br>
   Solar Noon: ${newDate[2]}</span></div>
   <div id="civilTime"><span>Civil Twilight Begin: ${newDate[4]}<br>
@@ -135,6 +134,7 @@ function main () {
       $('#reset').css('display', 'block');
       $('.tribute-text').css('display', 'none')
       $('.intro-text').css('display', 'none')
+      $('#results-header').css('display','block')
       return userDateSelected;
   })
 }
@@ -147,7 +147,8 @@ function reset () {
       $('#sunriseTime, #civilTime, #nauticalTime, #astronomicalTime, .mapImg, .results-header').remove();
       $('h1, fieldset').css('display','block');
      //$('fieldset').css('display','block');
-      $('#reset').css('display', 'none');
+      $('#reset',).css('display', 'none');
+      $('#results-header').css('display','none');
       $('.tribute-text, .intro-text').css('display', '')
   })
 }
