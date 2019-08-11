@@ -57,7 +57,6 @@ function getUserMapquestInfo (location) {
   .then(responseJson => {
     mapquestLat = `${responseJson.results[0].locations[0].latLng.lat}`
     mapquestLng = `${responseJson.results[0].locations[0].latLng.lng}`
-    console.log(responseJson)
     sunriseQuery(mapquestLat, mapquestLng, userDateSelected);
   })
   .catch(err => {
@@ -102,8 +101,7 @@ function formatUserParamsQuery (mapquestObjectData) {
 //the results
 function sunriseResultsData(responseJSON) {
   const newDate = Object.keys(responseJSON.results).map(key => `${new Date(`${userDateSelected.replace(/-/g, '/')} ${responseJSON.results[key]} UTC`)}`).map(string => string.slice(0,24)).map(string => string.concat(` Local Time`))
-  console.log(newDate);
-  return $('.search-results').html(
+   $('.search-results').append(
   `<div id="sunriseTime"><span>Sunrise: ${newDate[0]}<br>
   Sunset Time: ${newDate[1]}<br>
   Solar Noon: ${newDate[2]}</span></div>
@@ -112,14 +110,15 @@ function sunriseResultsData(responseJSON) {
   <div id="nauticalTime"><span>Nautical Twilight Begin: ${newDate[6]}<br>
   Nautical Twilight End: ${newDate[7]}</span></div>
   <div id="astronomicalTime"><span>Astronomical Twilight Begin: ${newDate[8]}<br>
-  Astronomical Twilight End: ${newDate[9]}</span></div>`)
+  Astronomical Twilight End: ${newDate[9]}</span></div>`).hide().fadeIn(1000)
+  //$('#sunriseTime, #civilTime, #nauticalTime, #astronomicalTime').fadeIn(1000);
 }
 
 
 //to draw map
 function drawMap (responseJson){
   $('.map').empty()
-  return $('.map').append(`<img class="mapImg" src="${responseJson}" alt="picture of location">`)
+  return $('.map').fadeIn(1000).append(`<img class="mapImg" src="${responseJson}" alt="picture of location">`).hide().fadeIn(1000);
 }
 
 
@@ -129,11 +128,10 @@ function main () {
       event.preventDefault();
       let userLocation = $('#user-input-location').val();
       userDateSelected = $('#user-input-date').val();
-      console.log(userDateSelected)
       getUserMapquestInfo(userLocation);
       getStaticMap(userLocation);
-      $('h1, fieldset, .tribute-text, .intro-text').css('display', 'none')
-      $('#reset, #results-header').css('display', 'block');
+      $('h1, fieldset, .tribute-text, .intro-text').fadeOut(250)
+      $('#reset, #results-header').fadeIn(1000).css('display', 'block');
       return userDateSelected;
   })
 }
@@ -143,11 +141,15 @@ $(main);
 //takes user back to start
 function reset () {
   $('.reset').on('click', '#reset', function (){
-      $('#sunriseTime, #civilTime, #nauticalTime, #astronomicalTime, .mapImg, .results-header').remove();
-      $('h1, fieldset').css('display','block');
-      $('#reset',).css('display', 'none');
-      $('#results-header').css('display','none');
-      $('.tribute-text, .intro-text').css('display', '')
+    $('#sunriseTime, #civilTime, #nauticalTime, #astronomicalTime, .mapImg, .results-header').remove();  
+    //$('#sunriseTime, #civilTime, #nauticalTime, #astronomicalTime, .mapImg, .results-header').remove();
+    $('h1, fieldset').fadeIn(1000);
+    //$('h1, fieldset').css('display','block');
+    //$('#reset',).fadeOut(250);
+     $('#reset',).css('display', 'none');
+    //$('#results-header').fadeOut(250);
+    $('#results-header').css('display','none');  
+    $('.tribute-text, .intro-text').fadeIn(1000)
   })
 }
 $(reset);
