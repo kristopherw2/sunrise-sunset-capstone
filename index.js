@@ -21,7 +21,6 @@ function getStaticMap(userLocation) {
   const staticMapRequestURL = staticMapURL + formattedStaticMapParams
 
 
-
   fetch(staticMapRequestURL)
     .then(response => {
       if (response.ok) {
@@ -60,13 +59,14 @@ function getUserMapquestInfo(location) {
       if (responseJson.results[0].locations[0].adminArea3 === "" || responseJson.results[0].locations[0].adminArea4 === "") {
         $('.error-messages').text('Please enter a valid location')
        return $('#results-header').css('display', 'none');
-      } else {
+      } 
+
         mapquestLat = `${responseJson.results[0].locations[0].latLng.lat}`
         mapquestLng = `${responseJson.results[0].locations[0].latLng.lng}`
         sunriseQuery(mapquestLat, mapquestLng, userDateSelected);
         getStaticMap(responseJson.results[0].providedLocation.location);
         
-      }
+    
     })
     .catch(err => {
       $('.error-messages').text(`${err.message}`)
@@ -96,7 +96,7 @@ function sunriseQuery(mapquestLat, mapquestLng, userDateSelected) {
       sunriseResultsData(responseJson);
     })
     .catch(err => {
-      $('.error-messages').txt('Something went wrong')
+      $('.error-messages').txt(`${err.message}`)
     });
 }
 
