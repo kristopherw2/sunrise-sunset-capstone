@@ -19,8 +19,8 @@ html {
   background-size: cover;
   color: whitesmoke;
   background-image: linear-gradient(to bottom, rgba(255, 159, 134, .40), rgba(60, 48, 67, .70)), url(https://cdn.pixabay.com/photo/2017/02/19/15/28/italy-2080072_960_720.jpg);
-  height: 100%;
 }
+
 h1 {
   font-size: 125%;
   font-weight: normal;
@@ -28,6 +28,7 @@ h1 {
   color: white;
   text-shadow: 1px 1px black;
 }
+
 #results-header {
   display: none;
   text-align: center;
@@ -44,7 +45,7 @@ form {
   max-width: 360px;
   margin-left: auto;
   margin-right: auto;
- }
+}
 
 input {
   margin: auto;
@@ -78,6 +79,7 @@ span {
   flex-direction: row;
   box-sizing: border-box;
 }
+
 #sunriseTime,
 #civilTime,
 #nauticalTime,
@@ -87,7 +89,7 @@ span {
   width: 100%;
   border: solid 2px white;
   margin: 25px auto 0 auto;
-  }
+}
 
 div #sunriseTime {
   border-color: #8AE9C1;
@@ -153,6 +155,14 @@ br {
   height: 170px;
 }
 
+.error-messages {
+    text-align: center;
+    margin-bottom: 5px;
+    text-shadow: 1px 1px black;
+
+}
+
+
 @media only screen and (min-width: 768px) {
   html {
     background: url(https://cdn.pixabay.com/photo/2017/02/19/15/28/italy-2080072_960_720.jpg) no-repeat center center fixed;
@@ -164,9 +174,11 @@ br {
     background-image: linear-gradient(to bottom, rgba(255, 159, 134, .40), rgba(60, 48, 67, .60)), url(https://cdn.pixabay.com/photo/2017/09/06/08/18/palm-2720615_960_720.jpg);
     height: 100%;
   }
+
   h1 {
     font-size: 200%;
   }
+
   .mapImg {
     margin-top: 3%;
     width: 300px;
@@ -178,19 +190,24 @@ br {
   #nauticalTime,
   #astronomicalTime {
     width: 45%;
+  }
+
+  .error-messages {
+    font-size: 130%
   }
 }
 
+
 @media only screen and (min-width: 1024px) {
   .intro-text {
-    font-size: 120%;
+    font-size: 150%;
 
   }
-  
+
   h1 {
     font-size: 250%;
   }
-  
+
   #sunriseTime,
   #civilTime,
   #nauticalTime,
@@ -203,4 +220,20 @@ br {
     width: 300px;
     height: 300px;
   }
+
+  #user-input-location,
+  #user-input-date {
+    height: 30px
+  }
+}
+
+@media only screen and (min-width: 2560px) {
+  h1 {
+    font-size: 400%;
+  }
+
+  .intro-text {
+    font-size: 300%;
+  }
+
 }
