@@ -13,21 +13,19 @@
 <body id="body">
     <h1>Find out about your sunrise and sunset!</h1>
     <p class="intro-text">Enter a location and date and learn about your day!</p>
-
+    <form>
     <fieldset>
-        <form>
-            <input type="text" id="user-input-location" autocomplete="off" placeholder="Ex: Atlanta, GA" required>
-            <input type="date" id="user-input-date" required>
-            <input type="submit" id="user-click" value="Submit">
-        </form>
+        <input type="text" id="user-input-location" autocomplete="off" placeholder="Ex: Atlanta, GA" required>
+        <input type="date" id="user-input-date" required>
+        <input type="submit" id="user-click" value="Submit">
     </fieldset>
-
+    </form>
     <h2 id="results-header">Here is how your day looks! Be safe on your adventures!</h2>
     <div class="error-messages"></div>
     <div class="search-results"></div>
     <div class="map"> </div>
     <div class="reset">
-      <input id="reset" type="button" name="reset" value="return to home">
+        <input id="reset" type="button" name="reset" value="return to home">
     </div>
     <div class="tribute-text"><span>Powered by sunrise-sunset.org</span></div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

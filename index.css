@@ -48,30 +48,37 @@ form {
   margin-right: auto;
 }
 
-input {
+/*input {
   margin: auto;
-}
+}*/
 
 #user-input-location,
 #user-input-date {
   display: flex;
   margin: 10px;
+  width: 100%;
+  border: black 1px solid;
+  border-radius: 5px;
+  padding: 5px;
 }
 
 #user-click {
   margin-left: auto;
   margin-right: auto;
+  height: 30px;
+  width: 60px;
+  font-size: 15px;
+  border-radius: 1px;
+  padding: 3px;
 }
 
 fieldset {
-  max-width: 360px;
-  margin: auto;
   border: none;
 }
 
 span {
-  color: white;
-  text-shadow: 1px 1px black;
+  color: black;
+  font-weight: bold;
 }
 
 .search-results {
@@ -90,6 +97,8 @@ span {
   width: 100%;
   border: solid 2px white;
   margin: 25px auto 0 auto;
+  background-color: rgba(255, 255, 255, .5);
+  color: black;
 }
 
 div #sunriseTime {
@@ -116,12 +125,13 @@ div #astronomicalTime {
   text-align: center;
 }
 
-.tribute-text {
+.tribute-text span {
   position: fixed;
   left: 3;
   bottom: 0;
   text-align: center;
   font-size: 60%;
+  color: white;
 }
 
 .intro-text {
@@ -162,6 +172,7 @@ br {
     text-shadow: 1px 1px black;
 
 }
+
 
 
 @media only screen and (min-width: 768px) {
@@ -224,17 +235,27 @@ br {
 
   #user-input-location,
   #user-input-date {
-    height: 30px
+    height: 25px
   }
 }
 
-@media only screen and (min-width: 2560px) {
+@media only screen and (min-width: 1440px) {
   h1 {
-    font-size: 400%;
+    font-size: 350%;
   }
 
   .intro-text {
-    font-size: 300%;
+    font-size: 250%;
+  }
+
+  #user-input-location,
+  #user-input-date {
+    height: 30px;
+    font-size: 20px
+  }
+
+  .user-click {
+    height: 28px;
   }
 
 }
