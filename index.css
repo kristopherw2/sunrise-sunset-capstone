@@ -187,6 +187,10 @@ br {
     height: 100%;
   }
 
+  .intro-text {
+    font-size: 125%;
+  }
+
   h1 {
     font-size: 200%;
   }
@@ -245,7 +249,7 @@ br {
   }
 
   .intro-text {
-    font-size: 250%;
+    font-size: 200%;
   }
 
   #user-input-location,
